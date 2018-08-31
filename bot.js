@@ -1,25 +1,22 @@
 const tmi = require('../node_modules/tmi.js')
 const haikudos = require('../node_modules/haikudos')
-
-const bot_name = "DaphneBot";
-const auth_token = "2hg62iupjg6aso9djautnw80505u2i";
-const channel_name = "ramblingnymph";
+var config = require('../configuration.js');
 
 // Valid commands start with:
 let commandPrefix = '!'
 // Define configuration options:
 let opts = {
   identity: {
-    username: bot_name,
-    password: 'oauth:' + auth_token
+    username: config.stream_settings.bot_name,
+    password: 'oauth:' + config.stream_settings.oauth
   },
   channels: [
-    channel_name
+    config.stream_settings.channel_name
   ]
 }
 
 // These are the commands the bot knows (defined below):
-let knownCommands = { echo, haiku }
+let knownCommands = { echo, haiku, daphne }
 
 // Function called when the "echo" command is issued:
 function echo (target, context, params) {
@@ -44,6 +41,11 @@ function haiku (target, context) {
     sendMessage(target, context, h)
     })
   })
+}
+
+function daphne (target, context){
+  let introduction = 'Hello! My name is ' + config.stream_settings.bot_name + ' - I am ' + config.stream_settings.screen_name + '\'s friend and loyal servant.';
+  sendMessage(target, context, introduction);
 }
 
 // Helper function to send the correct type of message:
