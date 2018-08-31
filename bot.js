@@ -2,7 +2,7 @@ const tmi = require('../node_modules/tmi.js')
 const haikudos = require('../node_modules/haikudos')
 
 const bot_name = "DaphneBot";
-const auth_token = "2hg62iupjg6aso9djautnw80505u2i";
+const auth_token = "0wdooopxri8ulbupgt5tqh38v5nhvc";
 const channel_name = "ramblingnymph";
 
 // Valid commands start with:
