@@ -1,6 +1,13 @@
 const tmi = require('../node_modules/tmi.js')
 const haikudos = require('../node_modules/haikudos')
+<<<<<<< HEAD
 var config = require('../configuration.js');
+=======
+
+const bot_name = "DaphneBot";
+const auth_token = "0wdooopxri8ulbupgt5tqh38v5nhvc";
+const channel_name = "ramblingnymph";
+>>>>>>> 95ec35ee82f6c72d485999fc1af2545db517b3cf
 
 // Valid commands start with:
 let commandPrefix = '!'
