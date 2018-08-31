@@ -11,10 +11,10 @@ let commandPrefix = '!'
 let opts = {
   identity: {
     username: bot_name,
-    password: 'oauth:' + auth_token;
+    password: 'oauth:' + auth_token
   },
   channels: [
-    channel_name;
+    channel_name
   ]
 }
 
