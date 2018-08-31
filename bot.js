@@ -1,13 +1,7 @@
 const tmi = require('../node_modules/tmi.js')
 const haikudos = require('../node_modules/haikudos')
-<<<<<<< HEAD
 var config = require('../configuration.js');
-=======
-
-const bot_name = "DaphneBot";
-const auth_token = "0wdooopxri8ulbupgt5tqh38v5nhvc";
-const channel_name = "ramblingnymph";
->>>>>>> 95ec35ee82f6c72d485999fc1af2545db517b3cf
+var random_kappa = require('./kappas.js');
 
 // Valid commands start with:
 let commandPrefix = '!'
@@ -23,7 +17,7 @@ let opts = {
 }
 
 // These are the commands the bot knows (defined below):
-let knownCommands = { echo, haiku, daphne }
+let knownCommands = { echo, haiku, daphne, fortune, kappa, roastme }
 
 // Function called when the "echo" command is issued:
 function echo (target, context, params) {
@@ -53,6 +47,42 @@ function haiku (target, context) {
 function daphne (target, context){
   let introduction = 'Hello! My name is ' + config.stream_settings.bot_name + ' - I am ' + config.stream_settings.screen_name + '\'s friend and loyal servant.';
   sendMessage(target, context, introduction);
+}
+
+function fortune(target, context){
+  const outcomes = [
+	`Tomorrow you will be very lucky, ${context.username}`,
+	`Today is not your day. Be strong and the worst shall pass.`,
+	`I forsee great opportunities for you in the near future. ${context.username}, make sure to keep your eyes peeled`,
+	`The near future is largely uneventful for you, ${context.username}. Be at ease and enjoy the little things.`,
+	`Now is a good time for financial wisdom.`,
+	`${context.username}. Be generous now to friends and strangers, and they will be sure to repay you tenfold when it matters.`,
+	`Love will find you soon, ${context.username}.`
+	]
+
+  let message = outcomes[Math.floor(Math.random() * outcomes.length)];
+  sendMessage(target, context, message);
+}
+
+function kappa(target, context){
+  let message = 'Oh wow, what a show of creativity. Let\'s spam the Kappa emote.';  
+  for(var i = 0; i < 10; i++){ message += ' ' + random_kappa();}
+
+  sendMessage(target, context, message);
+}
+
+function roastme(target, context){
+  let user = '@' + context.username;
+  const roasts = [
+	`If I wanted to kill myself, ${user}, I\'d jump from your ego to your IQ.`,
+	`${user}, I wish we were better strangers`,
+	`If you were a superhero, ${user}, you\'d be Aquaman.`,
+	`${user}, do us all a favor and don\'t stand upwind. I have a strong gag reflex and I don\'t feel like tasting my lunch another time.`,
+	`I could, ${user}, but I won\'t. It wouldn\'t even feel fair.`
+	]
+
+  let message = roasts[Math.floor(Math.random() * roasts.length)];
+  sendMessage(target, context, message);
 }
 
 // Helper function to send the correct type of message:
