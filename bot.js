@@ -2,6 +2,8 @@ const tmi = require('../node_modules/tmi.js')
 const haikudos = require('../node_modules/haikudos')
 var config = require('../configuration.js');
 var random_kappa = require('./kappas.js');
+var deathcounter = 0;
+
 
 // Valid commands start with:
 let commandPrefix = '!'
@@ -17,7 +19,7 @@ let opts = {
 }
 
 // These are the commands the bot knows (defined below):
-let knownCommands = { echo, haiku, daphne, fortune, kappa, roastme }
+let knownCommands = { echo, haiku, daphne, fortune, kappa, roastme, deaths, rip}
 
 // Function called when the "echo" command is issued:
 function echo (target, context, params) {
@@ -31,6 +33,8 @@ function echo (target, context, params) {
     console.log(`* Nothing to echo`)
   }
 }
+
+
 
 // Function called when the "haiku" command is issued:
 function haiku (target, context) {
@@ -70,6 +74,27 @@ function kappa(target, context){
 
   sendMessage(target, context, message);
 }
+
+function deaths(target, context){
+	var message = `${config.stream_settings.screen_name} has died ${deathcounter} times`;
+        sendMessage(target, context, message);
+}
+
+function rip(target, context){
+  if(is_moderator(context)){
+    deathcounter++;
+    deaths(target, context);
+  }
+}
+
+function is_moderator(context){
+	var sender = context.username;
+	if(sender == "ramblingnymph" || sender == "tytocorvus"){
+		return true;
+	}
+	return false;
+}
+
 
 function roastme(target, context){
   let user = '@' + context.username;
